@@ -11,10 +11,6 @@
       <End Role="Citas" EntitySet="Citas" />
       <End Role="Pacientes" EntitySet="Pacientes" />
     </AssociationSet>
-    <AssociationSet Name="CitasMedicos" Association="Model1.CitasMedicos">
-      <End Role="Citas" EntitySet="Citas" />
-      <End Role="Medicos" EntitySet="Medicos" />
-    </AssociationSet>
     <AssociationSet Name="IngresosPacientes" Association="Model1.IngresosPacientes">
       <End Role="Ingresos" EntitySet="Ingresos" />
       <End Role="Pacientes" EntitySet="Pacientes" />
@@ -26,6 +22,10 @@
     <AssociationSet Name="AltasIngresos" Association="Model1.AltasIngresos">
       <End Role="Altas" EntitySet="Altas" />
       <End Role="Ingresos" EntitySet="Ingresos" />
+    </AssociationSet>
+    <AssociationSet Name="CitasMedicos" Association="Model1.CitasMedicos">
+      <End Role="Citas" EntitySet="Citas" />
+      <End Role="Medicos" EntitySet="Medicos" />
     </AssociationSet>
   </EntityContainer>
   <EntityType Name="Pacientes">
@@ -69,6 +69,7 @@
     <NavigationProperty Name="Paciente" Relationship="Model1.CitasPacientes" FromRole="Citas" ToRole="Pacientes" />
     <Property Name="PacientesId" Type="Int32" Nullable="false" />
     <NavigationProperty Name="Medico" Relationship="Model1.CitasMedicos" FromRole="Citas" ToRole="Medicos" />
+    <Property Name="MedicosId" Type="Int32" Nullable="false" />
   </EntityType>
   <EntityType Name="Ingresos">
     <Key>
@@ -103,10 +104,6 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="CitasMedicos">
-    <End Type="Model1.Citas" Role="Citas" Multiplicity="*" />
-    <End Type="Model1.Medicos" Role="Medicos" Multiplicity="1" />
-  </Association>
   <Association Name="IngresosPacientes">
     <End Type="Model1.Ingresos" Role="Ingresos" Multiplicity="*" />
     <End Type="Model1.Pacientes" Role="Pacientes" Multiplicity="1" />
@@ -134,5 +131,17 @@
   <Association Name="AltasIngresos">
     <End Type="Model1.Altas" Role="Altas" Multiplicity="1" />
     <End Type="Model1.Ingresos" Role="Ingresos" Multiplicity="1" />
+  </Association>
+  <Association Name="CitasMedicos">
+    <End Type="Model1.Citas" Role="Citas" Multiplicity="*" />
+    <End Type="Model1.Medicos" Role="Medicos" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Medicos">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Citas">
+        <PropertyRef Name="MedicosId" />
+      </Dependent>
+    </ReferentialConstraint>
   </Association>
 </Schema>

@@ -12,10 +12,10 @@
         <EntityTypeShape EntityType="Model1.Ingresos" Width="1.5" PointX="8.125" PointY="2.75" />
         <EntityTypeShape EntityType="Model1.Altas" Width="1.5" PointX="10.125" PointY="3.25" />
         <AssociationConnector Association="Model1.CitasPacientes" />
-        <AssociationConnector Association="Model1.CitasMedicos" />
         <AssociationConnector Association="Model1.IngresosPacientes" />
         <AssociationConnector Association="Model1.IngresosHabitaciones" />
         <AssociationConnector Association="Model1.AltasIngresos" />
+        <AssociationConnector Association="Model1.CitasMedicos" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

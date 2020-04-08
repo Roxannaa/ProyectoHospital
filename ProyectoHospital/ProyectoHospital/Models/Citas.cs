@@ -18,6 +18,7 @@ namespace ProyectoHospital.Models
         public System.DateTime Fecha { get; set; }
         public System.TimeSpan Hora { get; set; }
         public int PacientesId { get; set; }
+        public int MedicosId { get; set; }
     
         public virtual Pacientes Paciente { get; set; }
         public virtual Medicos Medico { get; set; }

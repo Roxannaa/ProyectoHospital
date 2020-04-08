@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 04/08/2020 05:56:21
+-- Date Created: 04/08/2020 13:22:08
 -- Generated from EDMX file: C:\Users\Roxanna\Desktop\2020-C1\Programación III\proyectoHospital\ProyectoHospital\ProyectoHospital\ProyectoHospital\Models\Model1.edmx
 -- --------------------------------------------------
 
@@ -93,7 +93,7 @@ CREATE TABLE [dbo].[Citas] (
     [Fecha] datetime  NOT NULL,
     [Hora] time  NOT NULL,
     [PacientesId] int  NOT NULL,
-    [Medico_Id] int  NOT NULL
+    [MedicosId] int  NOT NULL
 );
 GO
 
@@ -174,21 +174,6 @@ ON [dbo].[Citas]
     ([PacientesId]);
 GO
 
--- Creating foreign key on [Medico_Id] in table 'Citas'
-ALTER TABLE [dbo].[Citas]
-ADD CONSTRAINT [FK_CitasMedicos]
-    FOREIGN KEY ([Medico_Id])
-    REFERENCES [dbo].[Medicos]
-        ([Id])
-    ON DELETE NO ACTION ON UPDATE NO ACTION;
-GO
-
--- Creating non-clustered index for FOREIGN KEY 'FK_CitasMedicos'
-CREATE INDEX [IX_FK_CitasMedicos]
-ON [dbo].[Citas]
-    ([Medico_Id]);
-GO
-
 -- Creating foreign key on [PacientesId] in table 'Ingresos'
 ALTER TABLE [dbo].[Ingresos]
 ADD CONSTRAINT [FK_IngresosPacientes]
@@ -232,6 +217,21 @@ GO
 CREATE INDEX [IX_FK_AltasIngresos]
 ON [dbo].[Altas]
     ([Ingreso_Id]);
+GO
+
+-- Creating foreign key on [MedicosId] in table 'Citas'
+ALTER TABLE [dbo].[Citas]
+ADD CONSTRAINT [FK_CitasMedicos]
+    FOREIGN KEY ([MedicosId])
+    REFERENCES [dbo].[Medicos]
+        ([Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_CitasMedicos'
+CREATE INDEX [IX_FK_CitasMedicos]
+ON [dbo].[Citas]
+    ([MedicosId]);
 GO
 
 -- --------------------------------------------------

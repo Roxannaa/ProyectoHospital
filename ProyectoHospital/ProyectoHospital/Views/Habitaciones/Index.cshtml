@@ -11,14 +11,14 @@
 <br />
 <body>
  
-    <button type="button" class="btn btn-primary">
-        @Html.ActionLink("Create New", "Create")
-    </button>
+    <a class="card-header">
+        <span class="text-success"> @Html.ActionLink("Create New", "Create")</span>
+    </a>
     <br />
-    <p> @Html.ActionLink("Reporte", "Imprimir")</p>
+    <a> @Html.ActionLink("Reporte", "Imprimir")</a>
     <br />
 
-    <div class="buscador form-control-lg  mb-3">
+    <div class="buscador card-header  mb-3">
         <br />
         <form action="Habitaciones" method="get">
             <input type="text" name="consulta" placeholder="Valor a buscar" />

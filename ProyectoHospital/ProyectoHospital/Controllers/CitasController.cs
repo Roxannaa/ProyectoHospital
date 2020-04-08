@@ -4,7 +4,6 @@ using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
-using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using ProyectoHospital.Models;
@@ -18,24 +17,22 @@ namespace ProyectoHospital.Controllers
         // GET: Citas
         public ActionResult Index(string consulta)
         {
-            /*var citas = db.Citas.Include(c => c.Paciente);*/
+            /*var citas = db.Citas.Include(c => c.Paciente).Include(c => c.Medico);
+            return View(citas.ToList());*/
+            try {
+                var busqueda = DateTime.Parse(consulta);
+                if (consulta != null)
+                {
+                    return View(db.Citas.Where(x => x.Fecha == busqueda | x.Medico.Nombre.Contains(consulta) | x.Paciente.Nombre.Contains(consulta)));
+                }
+            }
+            catch
+            {
+                return View(db.Citas.ToList());
+            }
+            return View(db.Citas.ToList());
             
-
-            int s = (from g in db.Pacientes where g.Nombre == consulta select g.Id).SingleOrDefault();
-            var otra = db.Citas.Include(l => l.Paciente).Where(a => a.Id == s);
-            return View(otra.ToList());
         }
-
-
-        /* public async Task<ActionResult> Index(string consulta)
-          {
-              var filter = db.Citas.Include(c => c.Medico.Nombre.Contains(consulta) |  c.Paciente.Nombre.Contains(consulta));
-              if (consulta != null)
-              {
-                  return View(filter);
-              }
-              return View(await db.Citas.ToListAsync());
-     }*/
 
         // GET: Citas/Details/5
         public ActionResult Details(int? id)
@@ -55,7 +52,8 @@ namespace ProyectoHospital.Controllers
         // GET: Citas/Create
         public ActionResult Create()
         {
-            ViewBag.PacientesId = new SelectList(db.Pacientes, "Id", "Cedula");
+            ViewBag.PacientesId = new SelectList(db.Pacientes, "Id", "Nombre");
+            ViewBag.MedicosId = new SelectList(db.Medicos, "Id", "Nombre");
             return View();
         }
 
@@ -64,7 +62,7 @@ namespace ProyectoHospital.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Fecha,Hora,PacientesId")] Citas citas)
+        public ActionResult Create([Bind(Include = "Id,Fecha,Hora,PacientesId,MedicosId")] Citas citas)
         {
             if (ModelState.IsValid)
             {
@@ -73,7 +71,8 @@ namespace ProyectoHospital.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.PacientesId = new SelectList(db.Pacientes, "Id", "Cedula", citas.PacientesId);
+            ViewBag.PacientesId = new SelectList(db.Pacientes, "Id", "Nombre", citas.PacientesId);
+            ViewBag.MedicosId = new SelectList(db.Medicos, "Id", "Nombre", citas.MedicosId);
             return View(citas);
         }
 
@@ -90,6 +89,7 @@ namespace ProyectoHospital.Controllers
                 return HttpNotFound();
             }
             ViewBag.PacientesId = new SelectList(db.Pacientes, "Id", "Cedula", citas.PacientesId);
+            ViewBag.MedicosId = new SelectList(db.Medicos, "Id", "Nombre", citas.MedicosId);
             return View(citas);
         }
 
@@ -98,7 +98,7 @@ namespace ProyectoHospital.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Fecha,Hora,PacientesId")] Citas citas)
+        public ActionResult Edit([Bind(Include = "Id,Fecha,Hora,PacientesId,MedicosId")] Citas citas)
         {
             if (ModelState.IsValid)
             {
@@ -107,6 +107,7 @@ namespace ProyectoHospital.Controllers
                 return RedirectToAction("Index");
             }
             ViewBag.PacientesId = new SelectList(db.Pacientes, "Id", "Cedula", citas.PacientesId);
+            ViewBag.MedicosId = new SelectList(db.Medicos, "Id", "Nombre", citas.MedicosId);
             return View(citas);
         }
 

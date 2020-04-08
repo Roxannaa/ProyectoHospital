@@ -16,10 +16,6 @@
       <End Role="Citas" EntitySet="Citas" />
       <End Role="Pacientes" EntitySet="Pacientes" />
     </AssociationSet>
-    <AssociationSet Name="CitasMedicos" Association="Model1.Store.CitasMedicos">
-      <End Role="Citas" EntitySet="Citas" />
-      <End Role="Medicos" EntitySet="Medicos" />
-    </AssociationSet>
     <AssociationSet Name="IngresosPacientes" Association="Model1.Store.IngresosPacientes">
       <End Role="Ingresos" EntitySet="Ingresos" />
       <End Role="Pacientes" EntitySet="Pacientes" />
@@ -31,6 +27,10 @@
     <AssociationSet Name="AltasIngresos" Association="Model1.Store.AltasIngresos">
       <End Role="Altas" EntitySet="Altas" />
       <End Role="Ingresos" EntitySet="Ingresos" />
+    </AssociationSet>
+    <AssociationSet Name="CitasMedicos" Association="Model1.Store.CitasMedicos">
+      <End Role="Citas" EntitySet="Citas" />
+      <End Role="Medicos" EntitySet="Medicos" />
     </AssociationSet>
   </EntityContainer>
   <EntityType Name="Pacientes">
@@ -68,7 +68,7 @@
     <Property Name="Fecha" Type="datetime" Nullable="false" />
     <Property Name="Hora" Type="time" Nullable="false" />
     <Property Name="PacientesId" Type="int" Nullable="false" />
-    <Property Name="Medico_Id" Type="int" Nullable="false" />
+    <Property Name="MedicosId" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="Ingresos">
     <Key>
@@ -97,18 +97,6 @@
       </Principal>
       <Dependent Role="Citas">
         <PropertyRef Name="PacientesId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="CitasMedicos">
-    <End Role="Citas" Type="Model1.Store.Citas" Multiplicity="*" />
-    <End Role="Medicos" Type="Model1.Store.Medicos" Multiplicity="1" />
-    <ReferentialConstraint>
-      <Principal Role="Medicos">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="Citas">
-        <PropertyRef Name="Medico_Id" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -148,6 +136,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="CitasMedicos">
+    <End Role="Citas" Type="Model1.Store.Citas" Multiplicity="*" />
+    <End Role="Medicos" Type="Model1.Store.Medicos" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Medicos">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Citas">
+        <PropertyRef Name="MedicosId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
@@ -163,10 +163,6 @@
             <End Role="Citas" EntitySet="Citas" />
             <End Role="Pacientes" EntitySet="Pacientes" />
           </AssociationSet>
-          <AssociationSet Name="CitasMedicos" Association="Model1.CitasMedicos">
-            <End Role="Citas" EntitySet="Citas" />
-            <End Role="Medicos" EntitySet="Medicos" />
-          </AssociationSet>
           <AssociationSet Name="IngresosPacientes" Association="Model1.IngresosPacientes">
             <End Role="Ingresos" EntitySet="Ingresos" />
             <End Role="Pacientes" EntitySet="Pacientes" />
@@ -178,6 +174,10 @@
           <AssociationSet Name="AltasIngresos" Association="Model1.AltasIngresos">
             <End Role="Altas" EntitySet="Altas" />
             <End Role="Ingresos" EntitySet="Ingresos" />
+          </AssociationSet>
+          <AssociationSet Name="CitasMedicos" Association="Model1.CitasMedicos">
+            <End Role="Citas" EntitySet="Citas" />
+            <End Role="Medicos" EntitySet="Medicos" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="Pacientes">
@@ -221,6 +221,7 @@
           <NavigationProperty Name="Paciente" Relationship="Model1.CitasPacientes" FromRole="Citas" ToRole="Pacientes" />
           <Property Name="PacientesId" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Medico" Relationship="Model1.CitasMedicos" FromRole="Citas" ToRole="Medicos" />
+          <Property Name="MedicosId" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityType Name="Ingresos">
           <Key>
@@ -255,10 +256,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="CitasMedicos">
-          <End Type="Model1.Citas" Role="Citas" Multiplicity="*" />
-          <End Type="Model1.Medicos" Role="Medicos" Multiplicity="1" />
-        </Association>
         <Association Name="IngresosPacientes">
           <End Type="Model1.Ingresos" Role="Ingresos" Multiplicity="*" />
           <End Type="Model1.Pacientes" Role="Pacientes" Multiplicity="1" />
@@ -286,6 +283,18 @@
         <Association Name="AltasIngresos">
           <End Type="Model1.Altas" Role="Altas" Multiplicity="1" />
           <End Type="Model1.Ingresos" Role="Ingresos" Multiplicity="1" />
+        </Association>
+        <Association Name="CitasMedicos">
+          <End Type="Model1.Citas" Role="Citas" Multiplicity="*" />
+          <End Type="Model1.Medicos" Role="Medicos" Multiplicity="1" />
+          <ReferentialConstraint>
+            <Principal Role="Medicos">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Citas">
+              <PropertyRef Name="MedicosId" />
+            </Dependent>
+          </ReferentialConstraint>
         </Association>
       </Schema>
     </edmx:ConceptualModels>
@@ -330,6 +339,7 @@
           <ScalarProperty Name="Fecha" ColumnName="Fecha" />
           <ScalarProperty Name="Hora" ColumnName="Hora" />
           <ScalarProperty Name="PacientesId" ColumnName="PacientesId" />
+          <ScalarProperty Name="MedicosId" ColumnName="MedicosId" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -352,14 +362,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <AssociationSetMapping Name="CitasMedicos" TypeName="Model1.CitasMedicos" StoreEntitySet="Citas">
-      <EndProperty Name="Medicos">
-        <ScalarProperty Name="Id" ColumnName="Medico_Id" />
-      </EndProperty>
-      <EndProperty Name="Citas">
-        <ScalarProperty Name="Id" ColumnName="Id" />
-      </EndProperty>
-    </AssociationSetMapping>
     <AssociationSetMapping Name="AltasIngresos" TypeName="Model1.AltasIngresos" StoreEntitySet="Altas">
       <EndProperty Name="Ingresos">
         <ScalarProperty Name="Id" ColumnName="Ingreso_Id" />

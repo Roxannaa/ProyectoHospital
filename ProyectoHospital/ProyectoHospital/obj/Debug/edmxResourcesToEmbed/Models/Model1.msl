@@ -38,6 +38,7 @@
           <ScalarProperty Name="Fecha" ColumnName="Fecha" />
           <ScalarProperty Name="Hora" ColumnName="Hora" />
           <ScalarProperty Name="PacientesId" ColumnName="PacientesId" />
+          <ScalarProperty Name="MedicosId" ColumnName="MedicosId" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -60,14 +61,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <AssociationSetMapping Name="CitasMedicos" TypeName="Model1.CitasMedicos" StoreEntitySet="Citas">
-      <EndProperty Name="Medicos">
-        <ScalarProperty Name="Id" ColumnName="Medico_Id" />
-      </EndProperty>
-      <EndProperty Name="Citas">
-        <ScalarProperty Name="Id" ColumnName="Id" />
-      </EndProperty>
-    </AssociationSetMapping>
     <AssociationSetMapping Name="AltasIngresos" TypeName="Model1.AltasIngresos" StoreEntitySet="Altas">
       <EndProperty Name="Ingresos">
         <ScalarProperty Name="Id" ColumnName="Ingreso_Id" />
