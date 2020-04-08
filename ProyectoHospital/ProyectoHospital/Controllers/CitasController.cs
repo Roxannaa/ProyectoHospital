@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using ProyectoHospital.Models;
+using Rotativa;
 
 namespace ProyectoHospital.Controllers
 {
@@ -32,6 +33,12 @@ namespace ProyectoHospital.Controllers
             }
             return View(db.Citas.ToList());
             
+        }
+
+        public ActionResult Imprimir()
+        {
+            var print = new ActionAsPdf("Index");
+            return print;
         }
 
         // GET: Citas/Details/5

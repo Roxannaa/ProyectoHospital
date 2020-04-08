@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using ProyectoHospital.Models;
+using Rotativa;
 
 namespace ProyectoHospital.Controllers
 {
@@ -15,12 +16,33 @@ namespace ProyectoHospital.Controllers
         private Model1Container db = new Model1Container();
 
         // GET: Ingresos
-        public ActionResult Index()
+        public ActionResult Index(string consulta)
         {
-            var ingresos = db.Ingresos.Include(i => i.Paciente).Include(i => i.Habitacione);
-            return View(ingresos.ToList());
-            
+           /* var ingresos = db.Ingresos.Include(i => i.Paciente).Include(i => i.Habitacione);
+            return View(ingresos.ToList());*/
+
+            try
+            {
+                var busqueda = DateTime.Parse(consulta);
+                if (consulta != null)
+                {
+                    return View(db.Ingresos.Where(x => x.FechaInicio == busqueda | x.Habitacione.Numero == Convert.ToInt32(consulta)));
+                }
+            }
+            catch
+            {
+                return View(db.Ingresos.ToList());
+            }
+            return View(db.Ingresos.ToList());
+
         }
+
+        public ActionResult Imprimir()
+        {
+            var print = new ActionAsPdf("Index");
+            return print;
+        }
+
 
         // GET: Ingresos/Details/5
         public ActionResult Details(int? id)

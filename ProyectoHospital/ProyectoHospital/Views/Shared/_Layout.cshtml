@@ -63,22 +63,10 @@
                         @Html.ActionLink("Agendar Cita", "Index", "Citas")
                         @Html.ActionLink("Ingresar Pacientes", "Index", "Ingresos")
                         @Html.ActionLink("De Alta Medica", "Index", "Altas")
-                        <a class="dropdown-item" asp-controller="Citas" asp-action="Index">Agendar Cita</a>
-                        <a class="dropdown-item" asp-controller="Ingresos" asp-action="Index">Ingresar Pacientes</a>
-                        <a class="dropdown-item" asp-controller="" asp-action="">De Altas Medicas</a>
 
                     </div>
                 </li>
-
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Filtros
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" asp-controller="AsignaturasMaestros" asp-action="">Asignar materias a profesores</a>
-                        <a class="dropdown-item" asp-controller="AsignaturasEstudiantes" asp-action="">Asignar materias a estudiantes</a>
-                    </div>
-                </li>
+   
             </ul>
         </div>
     </nav>
