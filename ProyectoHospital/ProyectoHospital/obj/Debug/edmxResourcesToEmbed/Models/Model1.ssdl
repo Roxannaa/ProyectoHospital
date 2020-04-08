@@ -1,0 +1,146 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Model1.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2012" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="Model1StoreContainer">
+    <EntitySet Name="Pacientes" EntityType="Model1.Store.Pacientes" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Medicos" EntityType="Model1.Store.Medicos" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Habitaciones" EntityType="Model1.Store.Habitaciones" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Citas" EntityType="Model1.Store.Citas" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Ingresos" EntityType="Model1.Store.Ingresos" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Altas" EntityType="Model1.Store.Altas" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="CitasPacientes" Association="Model1.Store.CitasPacientes">
+      <End Role="Citas" EntitySet="Citas" />
+      <End Role="Pacientes" EntitySet="Pacientes" />
+    </AssociationSet>
+    <AssociationSet Name="CitasMedicos" Association="Model1.Store.CitasMedicos">
+      <End Role="Citas" EntitySet="Citas" />
+      <End Role="Medicos" EntitySet="Medicos" />
+    </AssociationSet>
+    <AssociationSet Name="IngresosPacientes" Association="Model1.Store.IngresosPacientes">
+      <End Role="Ingresos" EntitySet="Ingresos" />
+      <End Role="Pacientes" EntitySet="Pacientes" />
+    </AssociationSet>
+    <AssociationSet Name="IngresosHabitaciones" Association="Model1.Store.IngresosHabitaciones">
+      <End Role="Ingresos" EntitySet="Ingresos" />
+      <End Role="Habitaciones" EntitySet="Habitaciones" />
+    </AssociationSet>
+    <AssociationSet Name="AltasIngresos" Association="Model1.Store.AltasIngresos">
+      <End Role="Altas" EntitySet="Altas" />
+      <End Role="Ingresos" EntitySet="Ingresos" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Pacientes">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Cedula" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Nombre" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Asegurado" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Medicos">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nombre" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Exequatur" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Especialidad" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Habitaciones">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Numero" Type="int" Nullable="false" />
+    <Property Name="Tipo" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Precio" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Citas">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Fecha" Type="datetime" Nullable="false" />
+    <Property Name="Hora" Type="time" Nullable="false" />
+    <Property Name="PacientesId" Type="int" Nullable="false" />
+    <Property Name="Medico_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Ingresos">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FechaInicio" Type="datetime" Nullable="false" />
+    <Property Name="PacientesId" Type="int" Nullable="false" />
+    <Property Name="HabitacionesId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Altas">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FechaSalida" Type="datetime" Nullable="false" />
+    <Property Name="MontoPagar" Type="int" Nullable="false" />
+    <Property Name="Ingreso_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="CitasPacientes">
+    <End Role="Citas" Type="Model1.Store.Citas" Multiplicity="*" />
+    <End Role="Pacientes" Type="Model1.Store.Pacientes" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Pacientes">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Citas">
+        <PropertyRef Name="PacientesId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="CitasMedicos">
+    <End Role="Citas" Type="Model1.Store.Citas" Multiplicity="*" />
+    <End Role="Medicos" Type="Model1.Store.Medicos" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Medicos">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Citas">
+        <PropertyRef Name="Medico_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="IngresosPacientes">
+    <End Role="Ingresos" Type="Model1.Store.Ingresos" Multiplicity="*" />
+    <End Role="Pacientes" Type="Model1.Store.Pacientes" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Pacientes">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Ingresos">
+        <PropertyRef Name="PacientesId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="IngresosHabitaciones">
+    <End Role="Ingresos" Type="Model1.Store.Ingresos" Multiplicity="*" />
+    <End Role="Habitaciones" Type="Model1.Store.Habitaciones" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Habitaciones">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Ingresos">
+        <PropertyRef Name="HabitacionesId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="AltasIngresos">
+    <End Role="Altas" Type="Model1.Store.Altas" Multiplicity="*" />
+    <End Role="Ingresos" Type="Model1.Store.Ingresos" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Ingresos">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Altas">
+        <PropertyRef Name="Ingreso_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>
