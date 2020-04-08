@@ -11,117 +11,122 @@ using ProyectoHospital.Models;
 
 namespace ProyectoHospital.Controllers
 {
-    public class MedicosController : Controller
+    public class CitasController : Controller
     {
         private Model1Container db = new Model1Container();
 
-        // GET: Medicos
+        // GET: Citas
         /*public ActionResult Index()
         {
-            return View(db.Medicos.ToList());
+            var citas = db.Citas.Include(c => c.Paciente);
+            return View(citas.ToList());
         }*/
 
         public async Task<ActionResult> Index(string consulta)
         {
-            var filter = db.Medicos.Where(q => q.Nombre.Contains(consulta) | q.Especialidad.Contains(consulta));
+            var filter = db.Citas.Include(c => c.Medico.Nombre.Contains(consulta) |  c.Paciente.Nombre.Contains(consulta));
             if (consulta != null)
             {
                 return View(filter);
             }
-            return View(await db.Medicos.ToListAsync());
+            return View(await db.Citas.ToListAsync());
         }
 
-        // GET: Medicos/Details/5
+        // GET: Citas/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Medicos medicos = db.Medicos.Find(id);
-            if (medicos == null)
+            Citas citas = db.Citas.Find(id);
+            if (citas == null)
             {
                 return HttpNotFound();
             }
-            return View(medicos);
+            return View(citas);
         }
 
-        // GET: Medicos/Create
+        // GET: Citas/Create
         public ActionResult Create()
         {
+            ViewBag.PacientesId = new SelectList(db.Pacientes, "Id", "Cedula");
             return View();
         }
 
-        // POST: Medicos/Create
+        // POST: Citas/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Nombre,Exequatur,Especialidad")] Medicos medicos)
+        public ActionResult Create([Bind(Include = "Id,Fecha,Hora,PacientesId")] Citas citas)
         {
             if (ModelState.IsValid)
             {
-                db.Medicos.Add(medicos);
+                db.Citas.Add(citas);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(medicos);
+            ViewBag.PacientesId = new SelectList(db.Pacientes, "Id", "Cedula", citas.PacientesId);
+            return View(citas);
         }
 
-        // GET: Medicos/Edit/5
+        // GET: Citas/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Medicos medicos = db.Medicos.Find(id);
-            if (medicos == null)
+            Citas citas = db.Citas.Find(id);
+            if (citas == null)
             {
                 return HttpNotFound();
             }
-            return View(medicos);
+            ViewBag.PacientesId = new SelectList(db.Pacientes, "Id", "Cedula", citas.PacientesId);
+            return View(citas);
         }
 
-        // POST: Medicos/Edit/5
+        // POST: Citas/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Nombre,Exequatur,Especialidad")] Medicos medicos)
+        public ActionResult Edit([Bind(Include = "Id,Fecha,Hora,PacientesId")] Citas citas)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(medicos).State = EntityState.Modified;
+                db.Entry(citas).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(medicos);
+            ViewBag.PacientesId = new SelectList(db.Pacientes, "Id", "Cedula", citas.PacientesId);
+            return View(citas);
         }
 
-        // GET: Medicos/Delete/5
+        // GET: Citas/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Medicos medicos = db.Medicos.Find(id);
-            if (medicos == null)
+            Citas citas = db.Citas.Find(id);
+            if (citas == null)
             {
                 return HttpNotFound();
             }
-            return View(medicos);
+            return View(citas);
         }
 
-        // POST: Medicos/Delete/5
+        // POST: Citas/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Medicos medicos = db.Medicos.Find(id);
-            db.Medicos.Remove(medicos);
+            Citas citas = db.Citas.Find(id);
+            db.Citas.Remove(citas);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

@@ -11,117 +11,117 @@ using ProyectoHospital.Models;
 
 namespace ProyectoHospital.Controllers
 {
-    public class MedicosController : Controller
+    public class HabitacionesController : Controller
     {
         private Model1Container db = new Model1Container();
 
-        // GET: Medicos
-        /*public ActionResult Index()
-        {
-            return View(db.Medicos.ToList());
-        }*/
+        // GET: Habitaciones
+         public ActionResult Index()
+         {
+             return View(db.Habitaciones.ToList());
+         }
 
-        public async Task<ActionResult> Index(string consulta)
-        {
-            var filter = db.Medicos.Where(q => q.Nombre.Contains(consulta) | q.Especialidad.Contains(consulta));
-            if (consulta != null)
-            {
-                return View(filter);
-            }
-            return View(await db.Medicos.ToListAsync());
-        }
+        /* public async Task<ActionResult> Index(string consulta)
+         {
+             var filter = db.Habitaciones.Where(q => q.Tipo.Contains(consulta));
+             if (consulta != null)
+             {
+                 return View(filter);
+             }
+             return View(await db.Habitaciones.ToListAsync());
+    }*/
 
-        // GET: Medicos/Details/5
+        // GET: Habitaciones/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Medicos medicos = db.Medicos.Find(id);
-            if (medicos == null)
+            Habitaciones habitaciones = db.Habitaciones.Find(id);
+            if (habitaciones == null)
             {
                 return HttpNotFound();
             }
-            return View(medicos);
+            return View(habitaciones);
         }
 
-        // GET: Medicos/Create
+        // GET: Habitaciones/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: Medicos/Create
+        // POST: Habitaciones/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Nombre,Exequatur,Especialidad")] Medicos medicos)
+        public ActionResult Create([Bind(Include = "Id,Numero,Tipo,Precio")] Habitaciones habitaciones)
         {
             if (ModelState.IsValid)
             {
-                db.Medicos.Add(medicos);
+                db.Habitaciones.Add(habitaciones);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(medicos);
+            return View(habitaciones);
         }
 
-        // GET: Medicos/Edit/5
+        // GET: Habitaciones/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Medicos medicos = db.Medicos.Find(id);
-            if (medicos == null)
+            Habitaciones habitaciones = db.Habitaciones.Find(id);
+            if (habitaciones == null)
             {
                 return HttpNotFound();
             }
-            return View(medicos);
+            return View(habitaciones);
         }
 
-        // POST: Medicos/Edit/5
+        // POST: Habitaciones/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Nombre,Exequatur,Especialidad")] Medicos medicos)
+        public ActionResult Edit([Bind(Include = "Id,Numero,Tipo,Precio")] Habitaciones habitaciones)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(medicos).State = EntityState.Modified;
+                db.Entry(habitaciones).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(medicos);
+            return View(habitaciones);
         }
 
-        // GET: Medicos/Delete/5
+        // GET: Habitaciones/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Medicos medicos = db.Medicos.Find(id);
-            if (medicos == null)
+            Habitaciones habitaciones = db.Habitaciones.Find(id);
+            if (habitaciones == null)
             {
                 return HttpNotFound();
             }
-            return View(medicos);
+            return View(habitaciones);
         }
 
-        // POST: Medicos/Delete/5
+        // POST: Habitaciones/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Medicos medicos = db.Medicos.Find(id);
-            db.Medicos.Remove(medicos);
+            Habitaciones habitaciones = db.Habitaciones.Find(id);
+            db.Habitaciones.Remove(habitaciones);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

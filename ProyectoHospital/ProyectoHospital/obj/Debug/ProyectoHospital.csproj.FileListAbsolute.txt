@@ -80,3 +80,9 @@ C:\Users\Roxanna\Desktop\2020-C1\Programación III\proyectoHospital\ProyectoHosp
 C:\Users\Roxanna\Desktop\2020-C1\Programación III\proyectoHospital\ProyectoHospital\ProyectoHospital\ProyectoHospital\obj\Debug\ProyectoHospital.csproj.CopyComplete
 C:\Users\Roxanna\Desktop\2020-C1\Programación III\proyectoHospital\ProyectoHospital\ProyectoHospital\ProyectoHospital\obj\Debug\ProyectoHospital.dll
 C:\Users\Roxanna\Desktop\2020-C1\Programación III\proyectoHospital\ProyectoHospital\ProyectoHospital\ProyectoHospital\obj\Debug\ProyectoHospital.pdb
+C:\Users\Roxanna\Desktop\2020-C1\Programación III\proyectoHospital\ProyectoHospital\ProyectoHospital\ProyectoHospital\bin\System.Net.Http.Formatting.dll
+C:\Users\Roxanna\Desktop\2020-C1\Programación III\proyectoHospital\ProyectoHospital\ProyectoHospital\ProyectoHospital\bin\System.Web.Http.dll
+C:\Users\Roxanna\Desktop\2020-C1\Programación III\proyectoHospital\ProyectoHospital\ProyectoHospital\ProyectoHospital\bin\System.Web.Http.WebHost.dll
+C:\Users\Roxanna\Desktop\2020-C1\Programación III\proyectoHospital\ProyectoHospital\ProyectoHospital\ProyectoHospital\bin\System.Net.Http.Formatting.xml
+C:\Users\Roxanna\Desktop\2020-C1\Programación III\proyectoHospital\ProyectoHospital\ProyectoHospital\ProyectoHospital\bin\System.Web.Http.xml
+C:\Users\Roxanna\Desktop\2020-C1\Programación III\proyectoHospital\ProyectoHospital\ProyectoHospital\ProyectoHospital\bin\System.Web.Http.WebHost.xml
