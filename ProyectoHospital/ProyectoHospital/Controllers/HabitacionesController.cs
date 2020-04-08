@@ -16,12 +16,12 @@ namespace ProyectoHospital.Controllers
         private Model1Container db = new Model1Container();
 
         // GET: Habitaciones
-         public ActionResult Index()
+        /* public ActionResult Index()
          {
              return View(db.Habitaciones.ToList());
-         }
+        }*/
 
-        /* public async Task<ActionResult> Index(string consulta)
+        public async Task<ActionResult> Index(string consulta)
          {
              var filter = db.Habitaciones.Where(q => q.Tipo.Contains(consulta));
              if (consulta != null)
@@ -29,7 +29,7 @@ namespace ProyectoHospital.Controllers
                  return View(filter);
              }
              return View(await db.Habitaciones.ToListAsync());
-    }*/
+    }
 
         // GET: Habitaciones/Details/5
         public ActionResult Details(int? id)

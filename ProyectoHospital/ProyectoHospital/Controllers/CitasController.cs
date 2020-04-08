@@ -16,21 +16,26 @@ namespace ProyectoHospital.Controllers
         private Model1Container db = new Model1Container();
 
         // GET: Citas
-        /*public ActionResult Index()
+        public ActionResult Index(string consulta)
         {
-            var citas = db.Citas.Include(c => c.Paciente);
-            return View(citas.ToList());
-        }*/
+            /*var citas = db.Citas.Include(c => c.Paciente);*/
+            
 
-        public async Task<ActionResult> Index(string consulta)
-        {
-            var filter = db.Citas.Include(c => c.Medico.Nombre.Contains(consulta) |  c.Paciente.Nombre.Contains(consulta));
-            if (consulta != null)
-            {
-                return View(filter);
-            }
-            return View(await db.Citas.ToListAsync());
+            int s = (from g in db.Pacientes where g.Nombre == consulta select g.Id).SingleOrDefault();
+            var otra = db.Citas.Include(l => l.Paciente).Where(a => a.Id == s);
+            return View(otra.ToList());
         }
+
+
+        /* public async Task<ActionResult> Index(string consulta)
+          {
+              var filter = db.Citas.Include(c => c.Medico.Nombre.Contains(consulta) |  c.Paciente.Nombre.Contains(consulta));
+              if (consulta != null)
+              {
+                  return View(filter);
+              }
+              return View(await db.Citas.ToListAsync());
+     }*/
 
         // GET: Citas/Details/5
         public ActionResult Details(int? id)

@@ -86,3 +86,4 @@ C:\Users\Roxanna\Desktop\2020-C1\Programación III\proyectoHospital\ProyectoHosp
 C:\Users\Roxanna\Desktop\2020-C1\Programación III\proyectoHospital\ProyectoHospital\ProyectoHospital\ProyectoHospital\bin\System.Net.Http.Formatting.xml
 C:\Users\Roxanna\Desktop\2020-C1\Programación III\proyectoHospital\ProyectoHospital\ProyectoHospital\ProyectoHospital\bin\System.Web.Http.xml
 C:\Users\Roxanna\Desktop\2020-C1\Programación III\proyectoHospital\ProyectoHospital\ProyectoHospital\ProyectoHospital\bin\System.Web.Http.WebHost.xml
+C:\Users\Roxanna\Desktop\2020-C1\Programación III\proyectoHospital\ProyectoHospital\ProyectoHospital\ProyectoHospital\bin\Rotativa.dll
