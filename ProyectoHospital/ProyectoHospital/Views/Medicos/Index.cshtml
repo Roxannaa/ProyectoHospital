@@ -4,16 +4,19 @@
     ViewBag.Title = "Index";
 }
 
+<button type="button" class="btn btn-outline-primary">
+    @Html.ActionLink("Create New", "Create")
+</button>
+<br />
+<p> @Html.ActionLink("Reporte", "Imprimir")</p>
+<br />
+
 <h2>Index</h2>
 <form action="Medicos" method="get">
     <input type="text" name="consulta" placeholder="Valor a buscar" />
     <input type="submit" value="BUSCAR" />
 </form>
 
-<br />
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
 <table class="table">
     <tr>
         <th>

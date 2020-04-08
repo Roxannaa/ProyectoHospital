@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using ProyectoHospital.Models;
+using Rotativa;
 
 namespace ProyectoHospital.Controllers
 {
@@ -30,6 +31,12 @@ namespace ProyectoHospital.Controllers
              }
              return View(await db.Habitaciones.ToListAsync());
     }
+
+        public ActionResult Imprimir()
+        {
+            var print = new ActionAsPdf("Index");
+            return print;
+        }
 
         // GET: Habitaciones/Details/5
         public ActionResult Details(int? id)
